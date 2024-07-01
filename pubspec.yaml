@@ -40,6 +40,9 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   firebase_core: ^3.1.1
   firebase_auth: ^5.1.1
+  firebase: ^9.0.3
+  google_sign_in: ^6.2.1
+  sign_in_with_apple: ^6.1.1
 
 dev_dependencies:
   flutter_test:

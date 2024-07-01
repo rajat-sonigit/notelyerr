@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notely/Screens/auth/dive.dart';
 import 'package:notely/Screens/auth/termscondition.dart';
 import 'package:notely/auth.dart';
-import 'package:notely/elements/circles.dart';
 import 'package:notely/elements/onboardingnavbar.dart';
 import 'package:notely/elements/style.dart';
 import 'package:notely/elements/textfield.dart';
 import 'package:sizer/sizer.dart';
 
 class NamePage extends StatelessWidget {
-    final AuthController authController = Get.put(AuthController());
+  final AuthController authController = Get.put(AuthController());
   final TextEditingController nameController = TextEditingController();
+  final String email;
+  final String password;
   final PageController _controller = PageController(initialPage: 2);
-  NamePage({Key? key}) : super(key: key);// Adjust initialPage as needed
-
+  NamePage({required this.email, required this.password, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,21 +74,26 @@ class NamePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Center(
+                        Center(
                             child: CustomTxtField(
-                              controller: nameController,
+                          controller: nameController,
                           HintText: "hint - Joe Disusa",
                           label: "Name",
                           textColor: Colors.black,
                           underlineColor: Colors.black,
                         )),
-                        Spacer(),
+                        const Spacer(),
                         OnboardingNavbar(
                           controller: _controller,
                           pageCount: 5, // Adjust this based on your pages count
-                          showPrevious: true, // First screen, no previous button
+                          showPrevious:
+                              true, // First screen, no previous button
                           onNext: () {
-                            Get.to(termsAndCondition());
+                            String name = nameController.text.trim();
+                            print(
+                                "NamePage: Email = $email, Password = $password, Name = $name");
+                            Get.to(termsAndCondition(
+                                email: email, password: password, name: name));
                           },
                           onPrevious: () {
                             Get.back(); // Implement navigation to previous page

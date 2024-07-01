@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notely/Screens/auth/login.dart';
+import 'package:notely/Screens/auth/name.dart';
 import 'package:notely/Screens/auth/signup.dart';
 import 'package:notely/elements/circles.dart';
 import 'package:notely/elements/onboardingnavbar.dart';
@@ -78,8 +79,10 @@ class StartScreen extends StatelessWidget {
                         Spacer(),
                         OnboardingNavbar(
                           controller: _controller,
-                          pageCount: 5, // Adjust this if you have multiple pages
-                          showPrevious: false, // First screen, no previous button
+                          pageCount:
+                              5, // Adjust this if you have multiple pages
+                          showPrevious:
+                              false, // First screen, no previous button
                           onNext: () {
                             Get.to(Signup());
                           },

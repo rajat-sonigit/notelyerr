@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notely/auth.dart';
-import 'package:notely/elements/circles.dart';
 import 'package:notely/elements/style.dart';
 import 'package:notely/elements/textfield.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginPage extends StatelessWidget {
-   final AuthController authController = Get.put(AuthController());
+  final AuthController authController = Get.put(AuthController());
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-   LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,17 +63,17 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Center(
+                        Center(
                             child: CustomTxtField(
-                              controller: emailController,
+                          controller: emailController,
                           HintText: "hint - warre@email.com",
                           label: "Email",
                           textColor: primaryColor,
                           underlineColor: primaryColor,
                         )),
-                         Center(
+                        Center(
                             child: CustomTxtField(
-                              controller: passwordController,
+                          controller: passwordController,
                           HintText: "hint - password123",
                           label: "Password",
                           textColor: primaryColor,
@@ -89,7 +89,9 @@ class LoginPage extends StatelessWidget {
                               Flexible(
                                 child: Center(
                                   child: Google_button(
-                                    onTap: () {},
+                                    onTap: () {
+                                      authController.googleSignIn();
+                                    },
                                     radius: 10,
                                   ),
                                 ),
@@ -100,7 +102,25 @@ class LoginPage extends StatelessWidget {
                               Flexible(
                                 child: Center(
                                   child: Apple_button(
-                                    onTap: () {},
+                                    onTap: () async {
+            // try {
+            //   final credential = await SignInWithApple.getAppleIDCredential(
+            //     scopes: [
+            //       AppleIDAuthorizationScopes.email,
+            //       AppleIDAuthorizationScopes.fullName,
+            //     ],
+            //     webAuthenticationOptions: WebAuthenticationOptions(
+            //       clientId: 'your_client_id', // Replace with your own client ID
+            //       redirectUri: Uri.parse('https://your-redirect-uri.com'), // Replace with your own redirect URI
+            //     ),
+            //   );
+            //   // Once you have the credential, use it to sign in with Firebase
+            //   await authController.signInWithApple(credential);
+            // } catch (e) {
+            //   print("Error signing in with Apple: $e");
+            //   // Handle error
+            // }
+          },
                                     radius: 10,
                                   ),
                                 ),
@@ -108,17 +128,20 @@ class LoginPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Spacer(),
-                        Center(child: text_buttonPrimary(
+                        const Spacer(),
+                        Center(
+                            child: text_buttonPrimary(
                           onTap: () {
-                            authController.login(emailController.text.trim(), passwordController.text.trim());
+                            authController.login(emailController.text.trim(),
+                                passwordController.text.trim());
                           },
-                          buttonColor: Color.fromRGBO(226, 221, 203, 1),
+                          buttonColor: const Color.fromRGBO(226, 221, 203, 1),
                           buttonText: 'Log In',
-                          buttonTextColor: Color.fromRGBO(214, 144, 105, 1),
-                          pageIndexToNavigate: 1, // Replace with actual page index
-                        )
-                        ),
+                          buttonTextColor:
+                              const Color.fromRGBO(214, 144, 105, 1),
+                          pageIndexToNavigate:
+                              1, // Replace with actual page index
+                        )),
                       ],
                     ),
                   ),

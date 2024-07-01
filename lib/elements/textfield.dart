@@ -18,13 +18,15 @@ class CustomTxtField extends StatelessWidget {
     required this.underlineColor,
     this.fontSize = 16.0, // Use your primaryColor if needed
     this.keyboardType = TextInputType.text,
-    required this.HintText, required this.controller,
+    required this.HintText,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           hintText: HintText,

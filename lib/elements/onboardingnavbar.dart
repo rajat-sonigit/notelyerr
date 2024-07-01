@@ -7,16 +7,16 @@ class OnboardingNavbar extends StatelessWidget {
   final int pageCount;
   final bool showPrevious;
   final VoidCallback onNext;
-  final VoidCallback? onPrevious; // Optional callback for previous button
+  final VoidCallback? onPrevious;
 
   const OnboardingNavbar({
-    Key? key,
+    super.key,
     required this.controller,
     required this.pageCount,
     this.showPrevious = true,
     required this.onNext,
     this.onPrevious,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

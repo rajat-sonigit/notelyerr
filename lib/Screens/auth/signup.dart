@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notely/Screens/auth/name.dart';
 import 'package:notely/auth.dart';
-import 'package:notely/elements/circles.dart';
 import 'package:notely/elements/onboardingnavbar.dart';
 import 'package:notely/elements/style.dart';
 import 'package:notely/elements/textfield.dart';
@@ -12,7 +11,8 @@ class Signup extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final PageController _controller = PageController(initialPage: 1); // Adjust initialPage as needed
+  final PageController _controller =
+      PageController(initialPage: 1); // Adjust initialPage as needed
 
   Signup({Key? key}) : super(key: key);
 
@@ -74,17 +74,17 @@ class Signup extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Center(
+                        Center(
                             child: CustomTxtField(
-                              controller: emailController,
+                          controller: emailController,
                           HintText: "hint - xyz@email.com",
                           label: "Email",
                           textColor: primaryColor,
                           underlineColor: primaryColor,
                         )),
-                         Center(
+                        Center(
                             child: CustomTxtField(
-                           controller: passwordController,
+                          controller: passwordController,
                           HintText: "hint - password123",
                           label: "Password",
                           textColor: primaryColor,
@@ -100,7 +100,9 @@ class Signup extends StatelessWidget {
                               Flexible(
                                 child: Center(
                                   child: Google_button(
-                                    onTap: () {},
+                                    onTap: () {
+                                      authController.googleSignIn();
+                                    },
                                     radius: 10,
                                   ),
                                 ),
@@ -118,15 +120,19 @@ class Signup extends StatelessWidget {
                               ),
                             ],
                           ),
-
                         ),
                         Spacer(),
                         OnboardingNavbar(
                           controller: _controller,
                           pageCount: 5, // Adjust this based on your pages count
-                          showPrevious: true, // First screen, no previous button
+                          showPrevious:
+                              true, // First screen, no previous button
                           onNext: () {
-                            Get.to(NamePage());
+                            String email = emailController.text.trim();
+                            String password = passwordController.text.trim();
+                            print(
+                                "Signup: Email = $email, Password = $password");
+                            Get.to(NamePage(email: email, password: password));
                           },
                           onPrevious: () {
                             Get.back(); // Implement navigation to previous page

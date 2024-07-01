@@ -2,11 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notely/Screens/auth/startscreen.dart';
 import 'package:get/get.dart';
+import 'package:notely/auth.dart';
 import 'package:sizer/sizer.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Get.put(AuthController());
   runApp(const MyApp());
 }
 

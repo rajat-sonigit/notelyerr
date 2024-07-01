@@ -8,7 +8,10 @@ import 'package:sizer/sizer.dart';
 
 class Dive extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
-   Dive({super.key});
+    final String email;
+  final String password;
+  final String name;
+   Dive({required this.email, required this.password, required this.name, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +73,8 @@ class Dive extends StatelessWidget {
                         ),
                         Center(child: text_buttonPrimary(
                           onTap: () {
-                            authController.register(Signup().emailController.text.trim(), Signup().passwordController.text.trim());
+                            print("Dive: Email = $email, Password = $password, Name = $name");
+                  AuthController.instance.register(email, password,name);
                           },
                           buttonColor: Color.fromRGBO(226, 221, 203, 1),
                           buttonText: 'Dive In',

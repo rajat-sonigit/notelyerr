@@ -9,11 +9,14 @@ import 'package:notely/elements/textfield.dart';
 import 'package:sizer/sizer.dart';
 
 class termsAndCondition extends StatelessWidget {
-    final AuthController authController = Get.put(AuthController());
+  final AuthController authController = Get.put(AuthController());
   final TextEditingController tcController = TextEditingController();
-  final PageController _controller = PageController(initialPage: 3); // Adjust initialPage as needed
-
-  termsAndCondition({Key? key}) : super(key: key);
+  final PageController _controller =
+      PageController(initialPage: 3); // Adjust initialPage as needed
+     final String email;
+  final String password;
+  final String name;
+     termsAndCondition({required this.email, required this.password, required this.name, super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +75,7 @@ class termsAndCondition extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       Center(
+                        Center(
                             child: CustomTxtField(
                           controller: tcController,
                           HintText: "",
@@ -89,9 +92,11 @@ class termsAndCondition extends StatelessWidget {
                         OnboardingNavbar(
                           controller: _controller,
                           pageCount: 5, // Adjust this based on your pages count
-                          showPrevious: true, // First screen, no previous button
+                          showPrevious:
+                              true, // First screen, no previous button
                           onNext: () {
-                            Get.to(Dive());
+                            print("NamePage: Email = $email, Password = $password, Name = $name");
+                  Get.to(Dive(email: email, password: password, name: name));
                           },
                           onPrevious: () {
                             Get.back(); // Implement navigation to previous page
