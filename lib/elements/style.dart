@@ -82,7 +82,7 @@ Widget Apple_button(
 
 Widget text_buttonPrimary({
   required VoidCallback onTap,
-  double radius = 10,// Default color
+  double radius = 10, // Default color
   required String buttonText,
   required Color buttonTextColor,
   required Color buttonColor,
@@ -100,7 +100,9 @@ Widget text_buttonPrimary({
       child: Center(
         child: Text(
           buttonText,
-          style: TextStyle(color: buttonTextColor, fontSize: 20.sp), // Using Sizer for responsive font size
+          style: TextStyle(
+              color: buttonTextColor,
+              fontSize: 20.sp), // Using Sizer for responsive font size
         ),
       ),
     ),
@@ -109,6 +111,9 @@ Widget text_buttonPrimary({
 
 const primaryColor = Color.fromRGBO(226, 221, 203, 1);
 const primaryColorlessvisible = Color.fromRGBO(226, 221, 203, 0.5);
-const SecondaryColor = Color.fromRGBO(10, 25, 48, 1);
-const SecondaryColorlessVisible = Color.fromRGBO(10, 25, 48, 0.5);
+const secondaryHeaderColor = Color.fromRGBO(10, 25, 48, 1);
+const secondaryHeaderColorlessVisible = Color.fromRGBO(10, 25, 48, 0.5);
 const tertiaryColor = Color.fromRGBO(214, 144, 105, 1);
+const roundfiller = Color.fromRGBO(249, 245, 231, 1);
+const roundfillerdark = Color.fromRGBO(81, 89, 101, 1);
+const darkmodebtn = Color.fromRGBO(166, 173, 184, 1);

@@ -52,7 +52,7 @@ class StartScreen extends StatelessWidget {
               ),
               Flexible(
                 child: Container(
-                  color: SecondaryColor,
+                  color: secondaryHeaderColor,
                   width: 100.w,
                   child: Padding(
                     padding: EdgeInsets.all(3.h),

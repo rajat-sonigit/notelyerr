@@ -8,10 +8,14 @@ import 'package:sizer/sizer.dart';
 
 class Dive extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
-    final String email;
+  final String email;
   final String password;
   final String name;
-   Dive({required this.email, required this.password, required this.name, super.key});
+  Dive(
+      {required this.email,
+      required this.password,
+      required this.name,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +48,7 @@ class Dive extends StatelessWidget {
               ),
               Flexible(
                 child: Container(
-                  color: SecondaryColor,
+                  color: secondaryHeaderColor,
                   width: 100.w,
                   child: Padding(
                     padding: EdgeInsets.all(3.h),
@@ -71,19 +75,20 @@ class Dive extends StatelessWidget {
                         SizedBox(
                           height: 4.h,
                         ),
-                        Center(child: text_buttonPrimary(
+                        Center(
+                            child: text_buttonPrimary(
                           onTap: () {
-                            print("Dive: Email = $email, Password = $password, Name = $name");
-                  AuthController.instance.register(email, password,name);
+                            print(
+                                "Dive: Email = $email, Password = $password, Name = $name");
+                            AuthController.instance
+                                .register(email, password, name);
                           },
                           buttonColor: Color.fromRGBO(226, 221, 203, 1),
                           buttonText: 'Dive In',
                           buttonTextColor: Color.fromRGBO(10, 25, 48, 1),
-                          pageIndexToNavigate: 1, // Replace with actual page index
-                        )
-                        ),
-
-
+                          pageIndexToNavigate:
+                              1, // Replace with actual page index
+                        )),
                       ],
                     ),
                   ),

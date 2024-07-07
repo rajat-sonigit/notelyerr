@@ -11,8 +11,9 @@ class Signup extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final PageController _controller =
-      PageController(initialPage: 1); // Adjust initialPage as needed
+  final PageController _controller = PageController(initialPage: 1);
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
 
   Signup({Key? key}) : super(key: key);
 
@@ -75,24 +76,52 @@ class Signup extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Center(
-                            child: CustomTxtField(
-                          controller: emailController,
-                          HintText: "hint - xyz@email.com",
-                          label: "Email",
-                          textColor: primaryColor,
-                          underlineColor: primaryColor,
-                        )),
-                        Center(
-                            child: CustomTxtField(
-                          controller: passwordController,
-                          HintText: "hint - password123",
-                          label: "Password",
-                          textColor: primaryColor,
-                          underlineColor: primaryColor,
-                        )),
-                        SizedBox(
-                          height: 3.h,
+                          child: TextFormField(
+                            controller: emailController,
+                            focusNode: emailFocusNode,
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (value) {
+                              emailFocusNode.unfocus();
+                              FocusScope.of(context)
+                                  .requestFocus(passwordFocusNode);
+                            },
+                            style: const TextStyle(color: primaryColor),
+                            decoration: const InputDecoration(
+                              labelText: "Email",
+                              hintText: "hint - xyz@email.com",
+                              labelStyle: TextStyle(color: primaryColor),
+                              hintStyle: TextStyle(color: primaryColor),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: primaryColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: primaryColor),
+                              ),
+                            ),
+                          ),
                         ),
+                        SizedBox(height: 3.h),
+                        Center(
+                          child: TextFormField(
+                            controller: passwordController,
+                            focusNode: passwordFocusNode,
+                            obscureText: true,
+                            style: const TextStyle(color: primaryColor),
+                            decoration: const InputDecoration(
+                              labelText: "Password",
+                              hintText: "hint - password123",
+                              labelStyle: TextStyle(color: primaryColor),
+                              hintStyle: TextStyle(color: primaryColor),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: primaryColor),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: primaryColor),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 3.h),
                         Padding(
                           padding: EdgeInsets.only(left: 12.w, right: 12.w),
                           child: Row(
@@ -107,9 +136,7 @@ class Signup extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 3.h,
-                              ),
+                              SizedBox(width: 3.h),
                               Flexible(
                                 child: Center(
                                   child: Apple_button(
@@ -121,7 +148,7 @@ class Signup extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         OnboardingNavbar(
                           controller: _controller,
                           pageCount: 5, // Adjust this based on your pages count

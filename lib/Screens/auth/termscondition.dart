@@ -13,10 +13,14 @@ class termsAndCondition extends StatelessWidget {
   final TextEditingController tcController = TextEditingController();
   final PageController _controller =
       PageController(initialPage: 3); // Adjust initialPage as needed
-     final String email;
+  final String email;
   final String password;
   final String name;
-     termsAndCondition({required this.email, required this.password, required this.name, super.key});
+  termsAndCondition(
+      {required this.email,
+      required this.password,
+      required this.name,
+      super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +32,7 @@ class termsAndCondition extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                color: SecondaryColor,
+                color: secondaryHeaderColor,
                 height: 50.h,
                 width: 100.w,
                 child: Column(
@@ -95,8 +99,10 @@ class termsAndCondition extends StatelessWidget {
                           showPrevious:
                               true, // First screen, no previous button
                           onNext: () {
-                            print("NamePage: Email = $email, Password = $password, Name = $name");
-                  Get.to(Dive(email: email, password: password, name: name));
+                            print(
+                                "NamePage: Email = $email, Password = $password, Name = $name");
+                            Get.to(Dive(
+                                email: email, password: password, name: name));
                           },
                           onPrevious: () {
                             Get.back(); // Implement navigation to previous page

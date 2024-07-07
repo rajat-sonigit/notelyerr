@@ -27,7 +27,7 @@ class NamePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                color: SecondaryColor,
+                color: secondaryHeaderColor,
                 height: 50.h,
                 width: 100.w,
                 child: Column(
