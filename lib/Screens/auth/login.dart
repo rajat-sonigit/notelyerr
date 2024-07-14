@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notely/auth.dart';
+import 'package:notely/Screens/auth/auth.dart';
 import 'package:notely/elements/style.dart';
 import 'package:sizer/sizer.dart';
 

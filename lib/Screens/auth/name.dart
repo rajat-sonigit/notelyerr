@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notely/Screens/auth/dive.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notely/Screens/auth/termscondition.dart';
-import 'package:notely/auth.dart';
+import 'package:notely/Screens/auth/auth.dart';
 import 'package:notely/elements/onboardingnavbar.dart';
 import 'package:notely/elements/style.dart';
 import 'package:notely/elements/textfield.dart';
@@ -16,6 +16,8 @@ class NamePage extends StatelessWidget {
   final PageController _controller = PageController(initialPage: 2);
   NamePage({required this.email, required this.password, super.key});
 
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,14 +88,12 @@ class NamePage extends StatelessWidget {
                         OnboardingNavbar(
                           controller: _controller,
                           pageCount: 5, // Adjust this based on your pages count
-                          showPrevious:
-                              true, // First screen, no previous button
+                          showPrevious: true, // First screen, no previous button
                           onNext: () {
                             String name = nameController.text.trim();
-                            print(
-                                "NamePage: Email = $email, Password = $password, Name = $name");
-                            Get.to(termsAndCondition(
-                                email: email, password: password, name: name));
+                            print("NamePage: Email = $email, Password = $password, Name = $name");
+                 
+                            Get.to(termsAndCondition(email: email, password: password, name: name));
                           },
                           onPrevious: () {
                             Get.back(); // Implement navigation to previous page

@@ -4,7 +4,7 @@ import 'package:notely/Screens/auth/startscreen.dart';
 import 'package:get/get.dart';
 import 'package:notely/Screens/settings/elements/themecontrollr.dart';
 import 'package:notely/Screens/settings/screens/setting.dart';
-import 'package:notely/auth.dart';
+import 'package:notely/Screens/auth/auth.dart';
 import 'package:sizer/sizer.dart';
 
 Future main() async {

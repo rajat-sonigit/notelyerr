@@ -46,6 +46,11 @@ android {
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
+    dependencies {
+  // Other dependencies
+      implementation 'com.google.firebase:firebase-appcheck-safetynet:16.0.0'
+}
+
 
     buildTypes {
         release {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notely/Screens/settings/elements/slidermodechange.dart';
 import 'package:notely/Screens/settings/elements/themecontrollr.dart';
-import 'package:notely/auth.dart';
+import 'package:notely/Screens/auth/auth.dart';
 import 'package:sizer/sizer.dart'; // Import your ThemeController
 
 class PfpPage extends StatelessWidget {

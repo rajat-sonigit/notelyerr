@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:notely/Screens/Home/controller/homecontroller.dart';
 import 'package:notely/Screens/settings/elements/slidermodechange.dart';
 import 'package:notely/Screens/settings/elements/themecontrollr.dart';
 import 'package:notely/Screens/settings/screens/changepfp.dart';
 import 'package:notely/Screens/settings/screens/profile.dart';
-import 'package:notely/auth.dart';
+import 'package:notely/Screens/auth/auth.dart';
 import 'package:sizer/sizer.dart'; // Import your ThemeController
 
 class SettingsPage extends StatelessWidget {
   final String? name;
   final AuthController authController = Get.put(AuthController());
   final ThemeController themeController = Get.put(ThemeController());
+  final UserController userController = Get.put(UserController());
 
   SettingsPage({super.key, required this.name});
 
@@ -79,11 +81,18 @@ class SettingsPage extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          CircleAvatar(
-                            radius: 6.w,
-                            backgroundImage:
-                                AssetImage('assets/notelyprofile.png'),
-                          ),
+                          Obx(() {
+                            return userController.profileImageUrl.value.isEmpty
+                                ? CircleAvatar(
+                                    radius: 6.w,
+                                    child: Icon(Icons.person),
+                                  )
+                                : CircleAvatar(
+                                    radius: 6.w,
+                                    backgroundImage: NetworkImage(
+                                        userController.profileImageUrl.value),
+                                  );
+                          }),
                           SizedBox(width: 4.w),
                           Text(
                             "Account name: $name",
@@ -134,9 +143,9 @@ class SettingsPage extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            Get.to(ProfilePage(name: name));
+                            userController.uploadProfileImage();
                           },
-                          child: Text("    Change password    "),
+                          child: Text("Change profile image"),
                           style: ElevatedButton.styleFrom(
                             foregroundColor: theme.secondaryHeaderColor,
                             backgroundColor: themeController
@@ -159,7 +168,7 @@ class SettingsPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(50),
                             ),
                           ),
-                          child: const Text(" Contact us "),
+                          child: const Text("Change pass"),
                         )
                       ],
                     ),

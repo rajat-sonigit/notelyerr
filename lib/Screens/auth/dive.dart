@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:notely/Screens/auth/signup.dart';
-import 'package:notely/auth.dart';
+import 'package:notely/Screens/Home/screens/home.dart';
+import 'package:notely/Screens/auth/auth.dart';
 import 'package:notely/elements/circles.dart';
 import 'package:notely/elements/style.dart';
 import 'package:sizer/sizer.dart';
@@ -80,8 +83,9 @@ class Dive extends StatelessWidget {
                           onTap: () {
                             print(
                                 "Dive: Email = $email, Password = $password, Name = $name");
-                            AuthController.instance
-                                .register(email, password, name);
+                            // AuthController.instance
+                            //     .register(email, password, name);
+                            _storeUserData(email,password,name );
                           },
                           buttonColor: Color.fromRGBO(226, 221, 203, 1),
                           buttonText: 'Dive In',
@@ -99,5 +103,33 @@ class Dive extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _storeUserData(String email, String password, String name) async {
+    try {
+      // Create user with email and password
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      // Get the UID
+      String uid = userCredential.user!.uid;
+
+      // Store user data in Firestore with the UID
+      DocumentReference userRef =
+          FirebaseFirestore.instance.collection('users').doc(uid);
+      await userRef.set({
+        'uid': uid,
+        'email': email,
+        'name': name,
+      });
+
+      print("User data stored successfully.");
+      Get.to(HomePage(userId: uid,)); // Navigate to HomePage to display the name
+    } catch (e) {
+      print("Failed to store user data: $e");
+    }
   }
 }
